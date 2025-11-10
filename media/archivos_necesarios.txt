@@ -1,0 +1,11 @@
+--------------------------
+File: /media/ (archivos sugeridos)
+-------------------------->
+<!--
+media/logo.svg         -> logotipo vectorial (optimizado)
+media/demo.mp4         -> video demo 10-15s (subtítulos embebidos SRT o captions en pista)
+media/demo.webm        -> alternativa webm
+media/demo.gif         -> GIF corto 10-15s (optimizado)
+media/testimonio.mp4   -> video de testimonio con subtítulos
+media/og-image.png     -> imagen para redes (1200x630)
+-->

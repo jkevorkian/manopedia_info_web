@@ -1,1065 +1,153 @@
-<!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manopedia - Rompiendo barreras, una seña a la vez</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { 
-            background: linear-gradient(135deg, #87CEEB 0%, #4A90E2 50%, #2E5BBA 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.15"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.15"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-        }
-        .card-hover { 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        .card-hover:hover { 
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            border-color: rgba(135, 206, 235, 0.3);
-        }
-        .feature-icon { 
-            background: linear-gradient(135deg, #87CEEB 0%, #4A90E2 100%);
-            box-shadow: 0 8px 32px rgba(74, 144, 226, 0.3);
-        }
-        .sun-accent { 
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
-        }
-        .scroll-smooth { scroll-behavior: smooth; }
-        
-        .floating-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .slide-in-left {
-            animation: slideInLeft 0.8s ease-out;
-        }
-        @keyframes slideInLeft {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .slide-in-right {
-            animation: slideInRight 0.8s ease-out;
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
-        }
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #4A90E2, #87CEEB);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #4A90E2 0%, #87CEEB 100%);
-            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.6);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
-        }
-        
-        .stats-counter {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #4A90E2;
-        }
-        
-        .testimonial-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border-left: 4px solid #4A90E2;
-        }
-        
-        .tech-stack-icon {
-            transition: all 0.3s ease;
-        }
-        .tech-stack-icon:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #4A90E2, transparent);
-            margin: 4rem 0;
-        }
-        
-        .navbar-blur {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-        
-        .progress-bar {
-            height: 4px;
-            background: linear-gradient(90deg, #4A90E2, #87CEEB);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            transition: width 0.3s ease;
-        }
-    </style>
+    <meta name="description"
+        content="Manopedia: aprende, practica y comunica en Lengua de Señas Argentina con inteligencia artificial. Comunicación inclusiva, accesible y moderna.">
+    <title>Manopedia — Aprende y comunica en LSA</title>
+    <link rel="icon" href="media/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="scroll-smooth">
-    <!-- Progress Bar -->
-    <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
-    
-    <!-- Navigation -->
-    <nav id="navbar" class="bg-white shadow-lg fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-500">🤟 Manopedia</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#inicio" class="text-gray-700 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
-                        <a href="#que-es" class="text-gray-700 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">¿Qué es?</a>
-                        <a href="#funcionalidades" class="text-gray-700 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">Funcionalidades</a>
-                        <a href="#equipo" class="text-gray-700 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">Equipo</a>
-                        <a href="#contacto" class="text-gray-700 hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium">Contacto</a>
-                    </div>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-500">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="#hero" class="logo-area">
+                <img src="media/logo.svg" alt="Logo Manopedia" class="logo">
+                <span class="brand">Manopedia</span>
+            </a>
+            <nav class="main-nav">
+                <button id="menu-toggle" aria-expanded="false">☰</button>
+                <ul id="menu-list">
+                    <li><a href="#about">Qué es</a></li>
+                    <li><a href="#how">Cómo funciona</a></li>
+                    <li><a href="#features">Características</a></li>
+                    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
+                    <!-- <li><a href="#community">Comunidad</a></li> -->
+                </ul>
+            </nav>
+            <div class="header-ctas" style="position: relative;">
+                <a href="#demo" class="btn btn-outline" style="pointer-events: none; opacity: 0.25;">Probar demo</a>
+                <a href="#beta" class="btn btn-primary" style="pointer-events: none; opacity: 0.25;">Unirme a la
+                    beta</a>
+                <span
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 220px; text-align: center; background: rgba(60,60,60,0.8); color: #fff; padding: 0.5em 1em; border-radius: 6px; font-weight: bold; font-size: 1rem; pointer-events: none;">
+                    Próximamente
+                </span>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#inicio" class="block px-3 py-2 text-gray-700 hover:text-blue-500">Inicio</a>
-                <a href="#que-es" class="block px-3 py-2 text-gray-700 hover:text-blue-500">¿Qué es?</a>
-                <a href="#funcionalidades" class="block px-3 py-2 text-gray-700 hover:text-blue-500">Funcionalidades</a>
-                <a href="#equipo" class="block px-3 py-2 text-gray-700 hover:text-blue-500">Equipo</a>
-                <a href="#contacto" class="block px-3 py-2 text-gray-700 hover:text-blue-500">Contacto</a>
+    </header>
+
+
+    <main>
+        <!-- HERO -->
+        <section id="hero" class="hero">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <h1>Aprende, practica y comunica en <span class="highlight">Lengua de Señas Argentina</span>.</h1>
+                    <p>Manopedia es la app que enseña y traduce la Lengua de Señas Argentina (LSA) con inteligencia
+                        artificial — para que comunicar sea más fácil, rápido e inclusivo.</p>
+                    <div class="hero-ctas" style="position: relative;">
+                        <a href="#demo" style="pointer-events: none; opacity: 0.25;"
+                            class="btn btn-primary large">Probar demo</a>
+                        <a href="#beta" style="pointer-events: none; opacity: 0.25;"
+                            class="btn btn-outline large">Unirme a la beta</a>
+                        <span
+                            style="position: absolute; top: 50%; left: 33%; transform: translate(-50%, -50%); min-width: 220px; text-align: center; background: rgba(60,60,60,0.8); color: #fff; padding: 0.5em 1em; border-radius: 6px; font-weight: bold; font-size: 1rem; pointer-events: none;">
+                            Próximamente
+                        </span>
+                    </div>
+                </div>
+                <div class="hero-media">
+                    <video autoplay muted loop playsinline class="demo-video"
+                        aria-label="Demostración de traducción de señas">
+                        <source src="media/demo.mp4" type="video/mp4">
+                    </video>
+                    <p class="caption">De la seña a la palabra, en un instante.</p>
+                </div>
             </div>
-        </div>
-    </nav>
+        </section>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="gradient-bg text-white pt-20 relative">
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 floating-animation opacity-20">
-            <i class="fas fa-hands text-4xl"></i>
-        </div>
-        <div class="absolute top-40 right-20 floating-animation opacity-20" style="animation-delay: -2s;">
-            <i class="fas fa-mobile-alt text-3xl"></i>
-        </div>
-        <div class="absolute bottom-20 left-20 floating-animation opacity-20" style="animation-delay: -4s;">
-            <i class="fas fa-graduation-cap text-3xl"></i>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-            <div class="text-center">
-                <div class="fade-in-up">
-                    <h1 class="text-6xl md:text-7xl font-black mb-6 tracking-tight">
-                        Mano<span class="text-gradient">pedia</span>
-                    </h1>
-                    <p class="text-2xl md:text-3xl mb-8 opacity-90 font-light italic">
-                        "Rompiendo barreras, una seña a la vez."
-                    </p>
-                </div>
-                
-                <div class="slide-in-left">
-                    <p class="text-xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
-                        La primera aplicación móvil educativa argentina que utiliza <strong>inteligencia artificial</strong> 
-                        para enseñar y traducir en tiempo real la Lengua de Señas Argentina (LSA)
-                    </p>
-                </div>
-                
-                <!-- Stats Row -->
-                <div class="grid grid-cols-3 gap-8 mb-12 max-w-2xl mx-auto">
-                    <div class="glass-effect rounded-lg p-4">
-                        <div class="stats-counter text-white">1M+</div>
-                        <p class="text-sm opacity-80">Personas con dificultades auditivas en Argentina</p>
-                    </div>
-                    <div class="glass-effect rounded-lg p-4">
-                        <div class="stats-counter text-white">24/7</div>
-                        <p class="text-sm opacity-80">Disponible siempre</p>
-                    </div>
-                    <div class="glass-effect rounded-lg p-4">
-                        <div class="stats-counter text-white">100%</div>
-                        <p class="text-sm opacity-80">Gratuita</p>
-                    </div>
-                </div>
-                
-                <!-- Demo Video Placeholder -->
-                <div class="slide-in-right">
-                    <div class="glass-effect rounded-2xl p-8 mb-12 max-w-5xl mx-auto card-hover">
-                        <div class="aspect-video bg-white bg-opacity-20 rounded-xl flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-blue-600/20"></div>
-                            <div class="text-center relative z-10">
-                                <div class="pulse-animation">
-                                    <i class="fas fa-play-circle text-8xl mb-6 opacity-90"></i>
-                                </div>
-                                <h3 class="text-2xl font-semibold mb-2">Demo Interactivo</h3>
-                                <p class="text-lg opacity-80">Traductor de señas y lecciones en acción</p>
-                                <div class="mt-4 flex justify-center space-x-4 text-sm opacity-70">
-                                    <span>• Reconocimiento en tiempo real</span>
-                                    <span>• Lecciones adaptativas</span>
-                                    <span>• Feedback instantáneo</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- CTA Buttons -->
-                <div class="fade-in-up">
-                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-                        <button class="btn-primary text-white px-10 py-5 rounded-xl font-bold text-lg flex items-center shadow-2xl">
-                            <i class="fab fa-google-play mr-4 text-2xl"></i>
-                            <div class="text-left">
-                                <div class="text-sm opacity-90">Disponible en</div>
-                                <div class="text-xl">Google Play</div>
-                            </div>
-                        </button>
-                        <button class="btn-secondary text-blue-900 px-10 py-5 rounded-xl font-bold text-lg flex items-center shadow-2xl">
-                            <i class="fab fa-apple mr-4 text-2xl"></i>
-                            <div class="text-left">
-                                <div class="text-sm opacity-90">Descargá en</div>
-                                <div class="text-xl">App Store</div>
-                            </div>
-                        </button>
-                    </div>
-                    
-                    <div class="flex justify-center items-center space-x-6 text-sm opacity-80">
-                        <div class="flex items-center">
-                            <i class="fas fa-star text-yellow-300 mr-1"></i>
-                            <span>Versión beta disponible</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-users mr-1"></i>
-                            <span>Únete a 500+ testers</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-shield-alt mr-1"></i>
-                            <span>100% segura</span>
-                        </div>
+        <!-- About -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2>¿Qué es Manopedia?</h2>
+                <div class="two-col">
+                    <div>
+                        <p>Manopedia es una aplicación móvil desarrollada para conectar a la comunidad sorda con el
+                            mundo oyente. Combina inteligencia artificial con herramientas educativas para aprender LSA
+                            y
+                            traducir señas en tiempo real.</p>
+                        <p>Buscamos derribar barreras comunicativas, promoviendo una sociedad más accesible e inclusiva.
+                        </p>
+
+                        <!-- NEW: Open Source Info -->
+                        <p><strong>🧩 Código abierto:</strong> tanto la <a href="https://github.com/jkevorkian/neural-network-manopedia" target="_blank"
+                                rel="noopener noreferrer">
+                                red neuronal
+                            </a> como la <a href="https://github.com/jkevorkian/manopedia_onpremise" target="_blank"
+                                rel="noopener noreferrer">
+                                aplicación móvil
+                            </a> de
+                            Manopedia son de código abierto. Creemos en la colaboración y en el desarrollo comunitario de herramientas inclusivas.
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Wave Divider -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden">
-            <svg class="relative block w-full h-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#f9fafb"></path>
-            </svg>
-        </div>
-    </section>
+        </section>
 
-    <!-- What is Manopedia -->
-    <section id="que-es" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">¿Qué es Manopedia?</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Una aplicación móvil educativa que facilita la inclusión social acercando la lengua de señas a oyentes y no oyentes
-                </p>
-            </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Nuestro Propósito</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="feature-icon text-white p-3 rounded-lg mr-4 flex-shrink-0">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Facilitar la inclusión social</h4>
-                                <p class="text-gray-600">Creando puentes de comunicación entre todas las personas</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="feature-icon text-white p-3 rounded-lg mr-4 flex-shrink-0">
-                                <i class="fas fa-hands"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Acercar la lengua de señas</h4>
-                                <p class="text-gray-600">Haciendo accesible el aprendizaje de LSA para todos</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="feature-icon text-white p-3 rounded-lg mr-4 flex-shrink-0">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Romper barreras con tecnología</h4>
-                                <p class="text-gray-600">Utilizando IA para traducir señas en tiempo real</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">¿Por qué es necesaria?</h3>
-                    <div class="space-y-6">
-                        <div class="border-l-4 border-purple-500 pl-4">
-                            <h4 class="font-semibold text-gray-900">La Problemática</h4>
-                            <ul class="text-gray-600 mt-2 space-y-1">
-                                <li>• Más de 1 millón de personas con dificultades auditivas en Argentina</li>
-                                <li>• Falta de herramientas accesibles para aprender LSA</li>
-                                <li>• Poca difusión y conocimiento de la lengua de señas</li>
-                            </ul>
-                        </div>
-                        <div class="border-l-4 border-green-500 pl-4">
-                            <h4 class="font-semibold text-gray-900">Nuestro Objetivo</h4>
-                            <ul class="text-gray-600 mt-2 space-y-1">
-                                <li>• Plataforma de aprendizaje amigable y accesible</li>
-                                <li>• Traducción de señas en tiempo real</li>
-                                <li>• Mejorar la comunicación entre comunidades</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section id="funcionalidades" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Funcionalidades Principales</h2>
-                <p class="text-xl text-gray-600">Herramientas completas para aprender y traducir LSA</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Lecciones Interactivas -->
-                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
-                    <div class="feature-icon text-white p-4 rounded-lg mb-6 inline-block">
-                        <i class="fas fa-graduation-cap text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Lecciones Interactivas</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Aprendizaje por niveles</li>
-                        <li>• Sistema SRS adaptativo</li>
-                        <li>• Videos demostrativos</li>
-                        <li>• Práctica con cámara</li>
-                    </ul>
-                </div>
-
-                <!-- Repasos -->
-                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
-                    <div class="feature-icon text-white p-4 rounded-lg mb-6 inline-block">
-                        <i class="fas fa-redo text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Repasos</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Revisión de vocabulario</li>
-                        <li>• Evaluación con IA</li>
-                        <li>• Seguimiento de progreso</li>
-                        <li>• Refuerzo personalizado</li>
-                    </ul>
-                </div>
-
-                <!-- Diccionario LSA -->
-                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
-                    <div class="feature-icon text-white p-4 rounded-lg mb-6 inline-block">
-                        <i class="fas fa-book text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Diccionario LSA</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Categorías organizadas</li>
-                        <li>• Búsqueda por palabras</li>
-                        <li>• Guardado de favoritas</li>
-                        <li>• Hogar, alimentos, animales...</li>
-                    </ul>
-                </div>
-
-                <!-- Traductor en tiempo real -->
-                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
-                    <div class="feature-icon text-white p-4 rounded-lg mb-6 inline-block">
-                        <i class="fas fa-video text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Traductor en Tiempo Real</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Captura con cámara</li>
-                        <li>• Traducción automática</li>
-                        <li>• Conversión a texto y voz</li>
-                        <li>• Reconocimiento instantáneo</li>
-                    </ul>
-                </div>
-
-                <!-- Mi Cuenta -->
-                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
-                    <div class="feature-icon text-white p-4 rounded-lg mb-6 inline-block">
-                        <i class="fas fa-user text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Mi Cuenta</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• Seguimiento de progreso</li>
-                        <li>• Estadísticas detalladas</li>
-                        <li>• Sistema de logros</li>
-                        <li>• Niveles y rankings</li>
-                    </ul>
-                </div>
-
-                <!-- Tecnología -->
-                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
-                    <div class="feature-icon text-white p-4 rounded-lg mb-6 inline-block">
-                        <i class="fas fa-robot text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Tecnología IA</h3>
-                    <ul class="text-gray-600 space-y-2">
-                        <li>• TensorFlow & redes neuronales</li>
-                        <li>• Flutter + Java Spring</li>
-                        <li>• MongoDB + Google Cloud</li>
-                        <li>• TensorFlow Lite móvil</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Impacto Real</h2>
-                <p class="text-xl text-gray-600">Transformando vidas a través de la tecnología</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                <div class="text-center card-hover bg-white p-8 rounded-xl">
-                    <div class="feature-icon text-white p-6 rounded-full mb-4 inline-block">
-                        <i class="fas fa-heart text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Inclusión Social Real</h3>
-                    <p class="text-gray-600">Conectando comunidades y rompiendo barreras</p>
-                    <div class="mt-4 text-blue-600 font-semibold">+85% satisfacción</div>
-                </div>
-                <div class="text-center card-hover bg-white p-8 rounded-xl">
-                    <div class="feature-icon text-white p-6 rounded-full mb-4 inline-block">
-                        <i class="fas fa-clock text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Aprendizaje Flexible</h3>
-                    <p class="text-gray-600">Accesible en cualquier momento y lugar</p>
-                    <div class="mt-4 text-blue-600 font-semibold">24/7 disponible</div>
-                </div>
-                <div class="text-center card-hover bg-white p-8 rounded-xl">
-                    <div class="feature-icon text-white p-6 rounded-full mb-4 inline-block">
-                        <i class="fas fa-comments text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Mejor Comunicación</h3>
-                    <p class="text-gray-600">Entre oyentes y no oyentes</p>
-                    <div class="mt-4 text-blue-600 font-semibold">95% precisión</div>
-                </div>
-                <div class="text-center card-hover bg-white p-8 rounded-xl">
-                    <div class="feature-icon text-white p-6 rounded-full mb-4 inline-block">
-                        <i class="fas fa-gift text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Gratuita y Sin Barreras</h3>
-                    <p class="text-gray-600">Herramienta educativa para todos</p>
-                    <div class="mt-4 text-blue-600 font-semibold">100% gratis</div>
-                </div>
-            </div>
-            
-            <!-- Testimonials -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="testimonial-card p-6 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-gray-900">María González</h4>
-                            <p class="text-sm text-gray-600">Estudiante de LSA</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Manopedia cambió mi forma de aprender. Ahora puedo practicar en casa y el reconocimiento de señas es increíblemente preciso."</p>
-                    <div class="flex text-yellow-400 mt-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card p-6 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-gray-900">Prof. Ana Martín</h4>
-                            <p class="text-sm text-gray-600">Docente de LSA</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Como docente, recomiendo Manopedia a todos mis estudiantes. Es una herramienta pedagógica excepcional."</p>
-                    <div class="flex text-yellow-400 mt-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card p-6 rounded-xl shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-gray-900">Carlos Ruiz</h4>
-                            <p class="text-sm text-gray-600">Usuario sordo</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Finalmente una app que entiende nuestras necesidades. El traductor funciona perfectamente y ayuda a mi familia a comunicarse conmigo."</p>
-                    <div class="flex text-yellow-400 mt-4">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team -->
-    <section id="equipo" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Quiénes Somos</h2>
-                <p class="text-xl text-gray-600 mb-8">Equipo de estudiantes de UTN con visión social</p>
-                <div class="bg-blue-100 p-6 rounded-lg inline-block">
-                    <p class="text-lg text-blue-800 font-medium">Metodología Ágil (Scrum) • Desarrollo iterativo • Feedback continuo</p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
-                    <div class="w-20 h-20 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-user-tie text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Juan Nisimura</h3>
-                    <p class="text-blue-600 font-medium">Product Owner</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
-                    <div class="w-20 h-20 sun-accent rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-tasks text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Gastón Galarza</h3>
-                    <p class="text-yellow-600 font-medium">Scrum Master</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
-                    <div class="w-20 h-20 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-drafting-compass text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Nicolás Benvenaste</h3>
-                    <p class="text-blue-600 font-medium">Arquitecto</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
-                    <div class="w-20 h-20 sun-accent rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-bug text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Joaquín Kevorkian</h3>
-                    <p class="text-yellow-600 font-medium">Tester QA</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
-                    <div class="w-20 h-20 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Gonzalo Guini</h3>
-                    <p class="text-blue-600 font-medium">Analista Funcional</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-16">
-                <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-8 rounded-2xl">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Participación Activa de la Comunidad</h3>
-                    <p class="text-gray-600 mb-6">Desarrollamos junto a personas sordas, docentes e instituciones</p>
-                    <div class="grid md:grid-cols-3 gap-6 text-sm">
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <i class="fas fa-users text-blue-500 text-2xl mb-2"></i>
-                            <p class="font-semibold">Testimonios reales</p>
-                            <p class="text-gray-600">De usuarios sordos</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <i class="fas fa-chalkboard-teacher text-blue-500 text-2xl mb-2"></i>
-                            <p class="font-semibold">Docentes especializados</p>
-                            <p class="text-gray-600">En lengua de señas</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                            <i class="fas fa-building text-blue-500 text-2xl mb-2"></i>
-                            <p class="font-semibold">Instituciones aliadas</p>
-                            <p class="text-gray-600">Apoyo académico</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Technology Stack -->
-            <div class="mt-16">
-                <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">Stack Tecnológico</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="text-center">
-                        <div class="tech-stack-icon bg-blue-500 text-white p-6 rounded-2xl mb-4 inline-block">
-                            <i class="fab fa-android text-3xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Flutter</h4>
-                        <p class="text-sm text-gray-600">Desarrollo móvil multiplataforma</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="tech-stack-icon bg-green-500 text-white p-6 rounded-2xl mb-4 inline-block">
-                            <i class="fas fa-brain text-3xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">TensorFlow</h4>
-                        <p class="text-sm text-gray-600">Inteligencia artificial y ML</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="tech-stack-icon bg-orange-500 text-white p-6 rounded-2xl mb-4 inline-block">
-                            <i class="fab fa-java text-3xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">Spring Boot</h4>
-                        <p class="text-sm text-gray-600">Backend robusto y escalable</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="tech-stack-icon bg-green-600 text-white p-6 rounded-2xl mb-4 inline-block">
-                            <i class="fas fa-database text-3xl"></i>
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">MongoDB</h4>
-                        <p class="text-sm text-gray-600">Base de datos NoSQL</p>
-                    </div>
-                </div>
-                
-                <div class="mt-12 text-center">
-                    <div class="inline-flex items-center bg-blue-100 px-6 py-3 rounded-full">
-                        <i class="fab fa-google text-blue-600 mr-2"></i>
-                        <span class="text-blue-800 font-medium">Powered by Google Cloud Platform</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Collaboration -->
-    <section class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Colaborá con Nosotros</h2>
-                <p class="text-xl text-gray-600">Sumate a nuestra misión de inclusión</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-lg text-center card-hover">
-                    <div class="feature-icon text-white p-6 rounded-full mb-6 inline-block">
-                        <i class="fas fa-donate text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Donaciones</h3>
-                    <p class="text-gray-600 mb-6">Ayudanos a mantener la app gratuita y accesible para todos</p>
-                    <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                        Donar Ahora
-                    </button>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg text-center card-hover">
-                    <div class="feature-icon text-white p-6 rounded-full mb-6 inline-block">
-                        <i class="fas fa-school text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Instituciones</h3>
-                    <p class="text-gray-600 mb-6">Sumate con contenido educativo o brindá apoyo institucional</p>
-                    <button class="bg-yellow-500 text-blue-800 px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300">
-                        Contactanos
-                    </button>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg text-center card-hover">
-                    <div class="feature-icon text-white p-6 rounded-full mb-6 inline-block">
-                        <i class="fas fa-handshake text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Alianzas</h3>
-                    <p class="text-gray-600 mb-6">ONGs, escuelas y gobierno - trabajemos juntos</p>
-                    <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                        Formar Alianza
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section class="py-20 gradient-bg text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl font-bold mb-6">Descargá Manopedia</h2>
-            <p class="text-xl mb-12 opacity-90">Empezá a aprender LSA hoy mismo</p>
-            
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-                <button class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition duration-300 flex items-center">
-                    <i class="fab fa-google-play mr-3 text-2xl"></i>
+        <!-- How -->
+        <section id="how" class="how">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-10">Cómo funciona?</h2>
+                <div class="grid md:grid-cols-2 gap-10 items-center two-col">
                     <div class="text-left">
-                        <div class="text-xs">Disponible en</div>
-                        <div>Google Play</div>
+                        <p class="text-lg mb-6 text-gray-700">Manopedia utiliza inteligencia artificial para reconocer
+                            gestos y señas desde la cámara del dispositivo, interpretarlas mediante procesamiento de
+                            lenguaje natural y convertirlas en texto.</p>
                     </div>
-                </button>
-                <button class="bg-yellow-400 text-blue-800 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-300 transition duration-300 flex items-center">
-                    <i class="fab fa-apple mr-3 text-2xl"></i>
+                    <div class="media-box">
+                        <img src="media/traductor.jpg" alt="App Manopedia en acción">
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-10">Carcterísticas</h2>
+                <div class="grid md:grid-cols-2 gap-10 items-center two-col">
                     <div class="text-left">
-                        <div class="text-xs">Descargá en</div>
-                        <div>App Store</div>
+                        <!-- <p class="text-lg mb-6 text-gray-700"></p> -->
+                        <ul class="space-y-4 text-gray-700">
+                            <li> Traduccion de señas individuales en tiempo real (instantanea).</li>
+                            <li> Construccion de frases teniendo en cuenta el contexto gramatical.</li>
+                        </ul>
                     </div>
-                </button>
-            </div>
-
-            <!-- QR Code Placeholder -->
-            <div class="bg-white bg-opacity-20 p-8 rounded-lg inline-block mb-8">
-                <div class="w-32 h-32 bg-white bg-opacity-30 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-qrcode text-4xl opacity-80"></i>
-                </div>
-                <p class="mt-4 text-sm opacity-80">Código QR para descarga</p>
-            </div>
-
-            <p class="text-lg opacity-80">Versión beta disponible para testers</p>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contacto" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Contacto</h2>
-                <p class="text-xl text-gray-600">¿Tenés preguntas? ¡Escribinos!</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Envianos un mensaje</h3>
-                    <form class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tu nombre">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="tu@email.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
-                            <textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tu mensaje..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
-                            Enviar Mensaje
-                        </button>
-                    </form>
-                </div>
-
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Otras formas de contacto</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="feature-icon text-white p-3 rounded-lg mr-4">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Email de soporte</h4>
-                                <p class="text-gray-600">soporte@manopedia.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="feature-icon text-white p-3 rounded-lg mr-4">
-                                <i class="fab fa-github"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">GitHub</h4>
-                                <p class="text-gray-600">github.com/manopedia</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="feature-icon text-white p-3 rounded-lg mr-4">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900">Paper académico</h4>
-                                <p class="text-gray-600">Investigación y desarrollo</p>
-                            </div>
-                        </div>
+                    <div class="media-box">
+                        <img src="media/traductor.jpg" alt="App Manopedia en acción">
+                    </div>
+                    <div class="media-box">
+                        <img src="media/diccionario.png" alt="App Manopedia en acción">
+                    </div>
+                    <ul class="space-y-4 text-gray-700">
+                        <li> Diccionario audiovisual en expansión.</li>
+                    </ul>
+                    <ul class="space-y-4 text-gray-700">
+                        <li> Lecciones interactivas, progresivas y gamificadas.</li>
+                    </ul>
+                    <div class="media-box">
+                        <img src="media/lecciones_nuevas.png" alt="App Manopedia en acción">
                     </div>
 
-                    <div class="mt-8">
-                        <h4 class="text-lg font-semibold text-gray-900 mb-4">Seguinos en redes</h4>
-                        <div class="flex space-x-4">
-                            <button class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                                <i class="fab fa-facebook-f"></i>
-                            </button>
-                            <button class="bg-blue-400 text-white p-3 rounded-lg hover:bg-blue-500 transition duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </button>
-                            <button class="bg-pink-600 text-white p-3 rounded-lg hover:bg-pink-700 transition duration-300">
-                                <i class="fab fa-instagram"></i>
-                            </button>
-                            <button class="bg-blue-800 text-white p-3 rounded-lg hover:bg-blue-900 transition duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">🤟 Manopedia</h3>
-                    <p class="text-gray-400 mb-4">"Rompiendo barreras, una seña a la vez."</p>
-                    <p class="text-sm text-gray-500">Proyecto académico UTN con visión social</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Enlaces</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#inicio" class="hover:text-white transition duration-300">Inicio</a></li>
-                        <li><a href="#que-es" class="hover:text-white transition duration-300">¿Qué es?</a></li>
-                        <li><a href="#funcionalidades" class="hover:text-white transition duration-300">Funcionalidades</a></li>
-                        <li><a href="#equipo" class="hover:text-white transition duration-300">Equipo</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition duration-300">Política de privacidad</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Términos de uso</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Accesibilidad</a></li>
-                        <li><a href="#" class="hover:text-white transition duration-300">Licencia</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li>soporte@manopedia.com</li>
-                        <li>Universidad Tecnológica Nacional</li>
-                        <li>Buenos Aires, Argentina</li>
-                    </ul>
-                </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Manopedia. Todos los derechos reservados. Desarrollado con ❤️ por estudiantes de UTN.</p>
-            </div>
-        </div>
-    </footer>
+        </section>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                // Close mobile menu if open
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Progress bar and navbar effects
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const progressBar = document.getElementById('progress-bar');
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            
-            // Update progress bar
-            progressBar.style.width = scrollPercent + '%';
-            
-            // Navbar blur effect
-            if (scrollTop > 50) {
-                navbar.classList.add('navbar-blur');
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('navbar-blur');
-                navbar.classList.remove('shadow-lg');
-            }
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.card-hover, .testimonial-card');
-            animatedElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-        });
-
-        // Counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stats-counter');
-            counters.forEach(counter => {
-                const target = counter.textContent;
-                const numericValue = parseInt(target.replace(/\D/g, ''));
-                const suffix = target.replace(/\d/g, '');
-                let current = 0;
-                const increment = numericValue / 50;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= numericValue) {
-                        counter.textContent = numericValue + suffix;
-                        clearInterval(timer);
-                    } else {
-                        counter.textContent = Math.floor(current) + suffix;
-                    }
-                }, 50);
-            });
-        }
-
-        // Trigger counter animation when hero section is visible
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    heroObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroSection = document.getElementById('inicio');
-            if (heroSection) {
-                heroObserver.observe(heroSection);
-            }
-        });
-
-        // Form submission with enhanced feedback
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const button = this.querySelector('button[type="submit"]');
-            const originalText = button.textContent;
-            
-            button.textContent = 'Enviando...';
-            button.disabled = true;
-            
-            setTimeout(() => {
-                button.textContent = '¡Enviado!';
-                button.classList.add('bg-green-600');
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.disabled = false;
-                    button.classList.remove('bg-green-600');
-                    this.reset();
-                }, 2000);
-            }, 1000);
-        });
-
-        // Enhanced button interactions
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.textContent.includes('Play Store') || this.textContent.includes('App Store')) {
-                    // Create a more sophisticated modal-like alert
-                    const modal = document.createElement('div');
-                    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-                    modal.innerHTML = `
-                        <div class="bg-white p-8 rounded-2xl max-w-md mx-4 text-center">
-                            <i class="fas fa-mobile-alt text-blue-500 text-4xl mb-4"></i>
-                            <h3 class="text-xl font-bold mb-2">¡Próximamente!</h3>
-                            <p class="text-gray-600 mb-6">Manopedia estará disponible en las tiendas de aplicaciones muy pronto.</p>
-                            <button onclick="this.parentElement.parentElement.remove()" class="btn-primary text-white px-6 py-2 rounded-lg">Entendido</button>
-                        </div>
-                    `;
-                    document.body.appendChild(modal);
-                } else if (this.textContent.includes('Donar')) {
-                    alert('¡Gracias por tu interés en apoyar Manopedia! Sistema de donaciones próximamente.');
-                } else if (this.textContent.includes('Contactanos') || this.textContent.includes('Alianza')) {
-                    document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Parallax effect for floating elements
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.floating-animation');
-            
-            parallaxElements.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Add loading animation
-        window.addEventListener('load', function() {
-            document.body.classList.add('loaded');
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9669e31f93b91e98',t:'MTc1Mzc2MzQ5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
