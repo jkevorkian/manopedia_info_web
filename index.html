@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -11,122 +12,122 @@
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container header-content">
-            <a href="#hero" class="logo-area">
-                <img src="media/logo.svg" alt="Logo Manopedia" class="logo">
-                <span class="brand">Manopedia</span>
-            </a>
-            <nav class="main-nav">
-                <button id="menu-toggle" aria-expanded="false">☰</button>
-                <ul id="menu-list">
-                    <li><a href="#about">Qué es</a></li>
-                    <li><a href="#how">Cómo funciona</a></li>
-                    <li><a href="#features">Características</a></li>
-                    <!-- <li><a href="#roadmap">Roadmap</a></li> -->
-                    <!-- <li><a href="#community">Comunidad</a></li> -->
-                </ul>
-            </nav>
-            <div class="header-ctas" style="position: relative;">
-                <a href="#demo" class="btn btn-outline" style="pointer-events: none; opacity: 0.25;">Probar demo</a>
-                <a href="#beta" class="btn btn-primary" style="pointer-events: none; opacity: 0.25;">Unirme a la
-                    beta</a>
-                <span
-                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 220px; text-align: center; background: rgba(60,60,60,0.8); color: #fff; padding: 0.5em 1em; border-radius: 6px; font-weight: bold; font-size: 1rem; pointer-events: none;">
-                    Próximamente
-                </span>
-            </div>
-        </div>
-    </header>
+<header class="site-header">
+  <div class="container header-content">
+    <a href="#hero" class="logo-area">
+      <img src="media/logo.svg" alt="Logo Manopedia" class="logo">
+      <span class="brand">Manopedia</span>
+    </a>
+
+    <nav class="main-nav">
+      <button id="menu-toggle" aria-expanded="false">☰</button>
+      <ul id="menu-list">
+        <li><a href="#about" data-i18n="nav.about">Qué es</a></li>
+        <li><a href="#how" data-i18n="nav.how">Cómo funciona</a></li>
+        <li><a href="#features" data-i18n="nav.features">Características</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <div class="header-ctas">
+        <a href="#demo" class="btn btn-outline" style="pointer-events: none; opacity: 0.25;"
+          data-i18n="hero.try">Probar demo</a>
+        <a href="#beta" class="btn btn-primary" style="pointer-events: none; opacity: 0.25;"
+          data-i18n="hero.join">Unirme a la beta</a>
+        <span class="coming-soon" data-i18n="hero.soon">Próximamente</span>
+      </div>
+
+      <!-- ✅ Language Toggle -->
+      <div class="lang-toggle">
+        <button id="lang-switch" aria-label="Cambiar idioma">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
 
 
-    <main>
+    <main id="main">
         <!-- HERO -->
         <section id="hero" class="hero">
             <div class="container hero-grid">
                 <div class="hero-text">
-                    <h1>Aprende, practica y comunica en <span class="highlight">Lengua de Señas Argentina</span>.</h1>
-                    <p>Manopedia es la app que enseña y traduce la Lengua de Señas Argentina (LSA) con inteligencia
-                        artificial — para que comunicar sea más fácil, rápido e inclusivo.</p>
+                    <h1 data-i18n="hero.title">
+                        Aprende, practica y comunica en <span class="highlight">Lengua de Señas Argentina</span>.
+                    </h1>
+                    <p data-i18n="hero.description">
+                        Manopedia es la app que enseña y traduce la Lengua de Señas Argentina (LSA) con inteligencia
+                        artificial — para que comunicar sea más fácil, rápido e inclusivo.
+                    </p>
                     <div class="hero-ctas" style="position: relative;">
-                        <a href="#demo" style="pointer-events: none; opacity: 0.25;"
-                            class="btn btn-primary large">Probar demo</a>
-                        <a href="#beta" style="pointer-events: none; opacity: 0.25;"
-                            class="btn btn-outline large">Unirme a la beta</a>
+                        <a href="#demo" style="pointer-events: none; opacity: 0.25;" class="btn btn-primary large"
+                            data-i18n="hero.try">Probar demo</a>
+                        <a href="#beta" style="pointer-events: none; opacity: 0.25;" class="btn btn-outline large"
+                            data-i18n="hero.join">Unirme a la beta</a>
                         <span
-                            style="position: absolute; top: 50%; left: 33%; transform: translate(-50%, -50%); min-width: 220px; text-align: center; background: rgba(60,60,60,0.8); color: #fff; padding: 0.5em 1em; border-radius: 6px; font-weight: bold; font-size: 1rem; pointer-events: none;">
-                            Próximamente
-                        </span>
+                            style="position: absolute; top: 50%; left: 33%; transform: translate(-50%, -50%); min-width: 220px; text-align: center; background: rgba(60,60,60,0.8); color: #fff; padding: 0.5em 1em; border-radius: 6px; font-weight: bold; font-size: 1rem; pointer-events: none;"
+                            data-i18n="hero.soon">Próximamente</span>
                     </div>
                 </div>
                 <div class="hero-media">
-                    <video autoplay muted loop playsinline class="demo-video"
+                    <video autoplay muted loop playsinline class="demo-video" id="demo-video"
                         aria-label="Demostración de traducción de señas">
                         <source src="media/demo.mp4" type="video/mp4">
                     </video>
-                    <p class="caption">De la seña a la palabra, en un instante.</p>
+                    <p class="caption" data-i18n="hero.caption">De la seña a la palabra, en un instante.</p>
                 </div>
             </div>
         </section>
-
 
         <!-- About -->
         <section id="about" class="about">
             <div class="container">
-                <h2>¿Qué es Manopedia?</h2>
+                <h2 data-i18n="about.title">¿Qué es Manopedia?</h2>
                 <div class="two-col">
                     <div>
-                        <p>Manopedia es una aplicación móvil desarrollada para conectar a la comunidad sorda con el
-                            mundo oyente. Combina inteligencia artificial con herramientas educativas para aprender LSA
-                            y
-                            traducir señas en tiempo real.</p>
-                        <p>Buscamos derribar barreras comunicativas, promoviendo una sociedad más accesible e inclusiva.
-                        </p>
-
-                        <!-- NEW: Open Source Info -->
-                        <p><strong>🧩 Código abierto:</strong> tanto la <a href="https://github.com/jkevorkian/neural-network-manopedia" target="_blank"
-                                rel="noopener noreferrer">
-                                red neuronal
-                            </a> como la <a href="https://github.com/jkevorkian/manopedia_onpremise" target="_blank"
-                                rel="noopener noreferrer">
-                                aplicación móvil
-                            </a> de
-                            Manopedia son de código abierto. Creemos en la colaboración y en el desarrollo comunitario de herramientas inclusivas.
-                        </p>
+                        <p data-i18n="about.p1">Manopedia es una aplicación móvil desarrollada para conectar a la
+                            comunidad sorda con el mundo oyente. Combina inteligencia artificial con herramientas
+                            educativas para aprender LSA y traducir señas en tiempo real.</p>
+                        <p data-i18n="about.p2">Buscamos derribar barreras comunicativas, promoviendo una sociedad más
+                            accesible e inclusiva.</p>
+                        <p data-i18n="about.p3"><strong>🧩 Código abierto:</strong> tanto la <a
+                                href="https://github.com/jkevorkian/neural-network-manopedia" target="_blank"
+                                rel="noopener noreferrer">red neuronal</a> como la <a
+                                href="https://github.com/jkevorkian/manopedia_onpremise" target="_blank"
+                                rel="noopener noreferrer">aplicación móvil</a> de Manopedia son de código abierto.
+                            Creemos en la colaboración y en el desarrollo comunitario de herramientas inclusivas.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-
         <!-- How -->
         <section id="how" class="how">
             <div class="container">
-                <h2 class="text-3xl font-bold text-indigo-700 mb-10">Cómo funciona?</h2>
+                <h2 data-i18n="how.title" class="text-3xl font-bold text-indigo-700 mb-10">Cómo funciona?</h2>
                 <div class="grid md:grid-cols-2 gap-10 items-center two-col">
                     <div class="text-left">
-                        <p class="text-lg mb-6 text-gray-700">Manopedia utiliza inteligencia artificial para reconocer
-                            gestos y señas desde la cámara del dispositivo, interpretarlas mediante procesamiento de
-                            lenguaje natural y convertirlas en texto.</p>
+                        <p class="text-lg mb-6 text-gray-700" data-i18n="how.p1">Manopedia utiliza inteligencia
+                            artificial para reconocer gestos y señas desde la cámara del dispositivo, interpretarlas
+                            mediante procesamiento de lenguaje natural y convertirlas en texto.</p>
                     </div>
                     <div class="media-box">
                         <img src="media/traductor.jpg" alt="App Manopedia en acción">
                     </div>
                 </div>
             </div>
-            </div>
         </section>
 
         <!-- Features -->
         <section id="features" class="features">
             <div class="container">
-                <h2 class="text-3xl font-bold text-indigo-700 mb-10">Carcterísticas</h2>
+                <h2 data-i18n="features.title" class="text-3xl font-bold text-indigo-700 mb-10">Características</h2>
                 <div class="grid md:grid-cols-2 gap-10 items-center two-col">
                     <div class="text-left">
-                        <!-- <p class="text-lg mb-6 text-gray-700"></p> -->
                         <ul class="space-y-4 text-gray-700">
-                            <li> Traduccion de señas individuales en tiempo real (instantanea).</li>
-                            <li> Construccion de frases teniendo en cuenta el contexto gramatical.</li>
+                            <li data-i18n="features.f1">Traducción de señas individuales en tiempo real (instantánea).
+                            </li>
+                            <li data-i18n="features.f2">Construcción de frases teniendo en cuenta el contexto
+                                gramatical.</li>
                         </ul>
                     </div>
                     <div class="media-box">
@@ -136,18 +137,18 @@
                         <img src="media/diccionario.png" alt="App Manopedia en acción">
                     </div>
                     <ul class="space-y-4 text-gray-700">
-                        <li> Diccionario audiovisual en expansión.</li>
-                    </ul>
-                    <ul class="space-y-4 text-gray-700">
-                        <li> Lecciones interactivas, progresivas y gamificadas.</li>
+                        <li data-i18n="features.f3">Diccionario audiovisual en expansión.</li>
+                        <li data-i18n="features.f4">Lecciones interactivas, progresivas y gamificadas.</li>
                     </ul>
                     <div class="media-box">
                         <img src="media/lecciones_nuevas.png" alt="App Manopedia en acción">
                     </div>
-
                 </div>
             </div>
-            </div>
         </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
 
 </html>
